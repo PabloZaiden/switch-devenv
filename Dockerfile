@@ -1,12 +1,12 @@
 FROM ubuntu
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt update
-RUN apt install -y wget git build-essential libxml2 libxml2-dev libxml2-utils zip
+RUN apt install -y wget git build-essential libxml2 libxml2-dev libxml2-utils zip curl libarchive13 pkg-config libglm-dev
 WORKDIR /
-RUN wget https://github.com/devkitPro/pacman/releases/download/devkitpro-pacman-1.0.1/devkitpro-pacman.deb
-RUN dpkg -i devkitpro-pacman.deb
+RUN wget https://github.com/devkitPro/pacman/releases/download/v1.0.2/devkitpro-pacman.amd64.deb
+RUN dpkg -i devkitpro-pacman.amd64.deb
 RUN dkp-pacman -S --noconfirm switch-dev switch-libjpeg-turbo devkitARM devkitarm-rules
-RUN rm devkitpro-pacman.deb
+RUN rm devkitpro-pacman.amd64.deb
 ENV DEVKITPRO=/opt/devkitpro
 ENV DEVKITARM=/opt/devkitpro/devkitARM 
 RUN git clone https://github.com/switchbrew/libnx
